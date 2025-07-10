@@ -1,12 +1,16 @@
 'use client';
 
-
+import { useState } from 'react';
 import LogoTensura from "@/components/LogoTensura";
 import bg from "../../public/images/background/homescreen.webp";
 import PixelatedCursor from "@/components/PixelatedCursor";
+import DialogOverlay from '@/components/DialogOverlay';
 import { useBackgroundMusic, useHoverSound } from "@/hooks/useAudio";
 
 export default function homescreen() {
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  
   // Initialize background music
   useBackgroundMusic('/music/a_night_full_of_stars_peaceful_electronic_8_bitpiano_track_321551.mp3');
   
@@ -33,10 +37,9 @@ export default function homescreen() {
           onMouseEnter={playHoverSound}
         >
           Play Game
-          <span className="absolute -left-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">▶</span>
         </a>
-        <a
-          href="#options" 
+        <button
+          onClick={() => setIsOptionsOpen(true)} 
           className="menu-item relative group bg-gradient-to-b from-sky-500 to-sky-950 text-transparent bg-clip-text transition-all duration-300 hover:scale-110"
           style={{
             textShadow: '-3px -3px 0 oklch(75% 0.169 237.323)',
@@ -44,10 +47,9 @@ export default function homescreen() {
           onMouseEnter={playHoverSound}
         >
           Options
-          <span className="absolute -left-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">⚙</span>
-        </a>
-        <a
-          href="#about" 
+        </button>
+        <button
+          onClick={() => setIsAboutOpen(true)} 
           className="menu-item relative group bg-gradient-to-b from-sky-500 to-sky-950 text-transparent bg-clip-text transition-all duration-300 hover:scale-110"
           style={{
             textShadow: '-3px -3px 0 oklch(70% 0.169 237.323)',
@@ -55,9 +57,38 @@ export default function homescreen() {
           onMouseEnter={playHoverSound}
         >
           About
-          <span className="absolute -left-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">ℹ</span>
-        </a>
+        </button>
       </div>
+      
+      <DialogOverlay
+        isOpen={isOptionsOpen}
+        onClose={() => setIsOptionsOpen(false)}
+        title="Options"
+      >
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <span>Music Volume</span>
+            <input type="range" className="w-32" />
+          </div>
+          <div className="flex items-center justify-between">
+            <span>Sound Effects</span>
+            <input type="range" className="w-32" />
+          </div>
+        </div>
+      </DialogOverlay>
+
+      <DialogOverlay
+        isOpen={isAboutOpen}
+        onClose={() => setIsAboutOpen(false)}
+        title="About"
+      >
+        <div className="space-y-4">
+          <p>Tensura Slider is a fun sliding puzzle game featuring characters from "That Time I Got Reincarnated as a Slime".</p>
+          <p>Version: 1.0.0</p>
+          <p>Created with ❤️ by Tensura fans</p>
+        </div>
+      </DialogOverlay>
+      
       <PixelatedCursor />
     </div>
   )
