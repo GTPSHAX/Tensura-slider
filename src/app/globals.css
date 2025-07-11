@@ -28,13 +28,59 @@ body {
 /* Background Animation */
 @keyframes slow-zoom {
   0% {
-    transform: scale(1);
+    transform: scale(1) translate(0, 0);
+    filter: brightness(100%) saturate(100%);
+    background-position: 50% 50%;
+  }
+  10% {
+    transform: scale(1.02) translate(-5px, 3px);
+    filter: brightness(103%) saturate(102%);
+    background-position: 52% 48%;
+  }
+  20% {
+    transform: scale(1.04) translate(8px, -6px);
+    filter: brightness(106%) saturate(104%);
+    background-position: 48% 53%;
+  }
+  30% {
+    transform: scale(1.03) translate(-7px, 10px);
+    filter: brightness(104%) saturate(103%);
+    background-position: 51% 47%;
+  }
+  40% {
+    transform: scale(1.05) translate(12px, -4px);
+    filter: brightness(107%) saturate(105%);
+    background-position: 49% 51%;
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.06) translate(-9px, 7px);
+    filter: brightness(105%) saturate(104%);
+    background-position: 53% 49%;
+  }
+  60% {
+    transform: scale(1.04) translate(6px, -8px);
+    filter: brightness(106%) saturate(103%);
+    background-position: 47% 52%;
+  }
+  70% {
+    transform: scale(1.03) translate(-10px, 5px);
+    filter: brightness(104%) saturate(102%);
+    background-position: 50% 48%;
+  }
+  80% {
+    transform: scale(1.01) translate(4px, -2px);
+    filter: brightness(102%) saturate(101%);
+    background-position: 52% 50%;
+  }
+  90% {
+    transform: scale(1.005) translate(-3px, 1px);
+    filter: brightness(101%) saturate(100.5%);
+    background-position: 49% 51%;
   }
   100% {
-    transform: scale(1);
+    transform: scale(1) translate(0, 0);
+    filter: brightness(100%) saturate(100%);
+    background-position: 50% 50%;
   }
 }
 

@@ -54,7 +54,6 @@ export default function DialogOverlay({
           style={{
             background: 'linear-gradient(180deg, #87CEEB 0%, #4682B4 100%)',
             borderRadius: '0',
-            boxShadow: 'inset 2px 2px 0px rgba(255,255,255,0.3), inset -2px -2px 0px rgba(0,0,0,0.3)'
           }}
         >
           {/* Title bar */}
@@ -90,7 +89,12 @@ export default function DialogOverlay({
           </div>
           
           {/* Content area */}
-          <div className="p-4">
+          <div 
+            className="p-4"
+            style={{
+              boxShadow: 'inset 2px 2px 0px rgba(255,255,255,0.3), inset -2px -2px 0px rgba(0,0,0,0.3)'
+            }}
+          >
             <div 
               className="text-sky-100 mb-4"
               style={{
