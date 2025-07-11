@@ -3,30 +3,41 @@
 import { useEffect, useRef, useCallback } from 'react';
 
 /**
- * A custom React hook to manage background music playback with autoplay support.
- * Attempts to play audio automatically (muted to bypass browser restrictions) with a fade-in effect.
- * Falls back to user interaction (mousemove, click, or touch) if autoplay fails.
- * Provides a toggle function to pause/resume playback and handles page visibility.
+ * A custom React hook to manage background music playback with manual autoplay support.
+ * Provides a method to start playback manually, allowing control based on user settings (e.g., disable music).
+ * Handles fade-in effects, user interaction fallbacks, and page visibility.
  *
  * @param audioSrc - The URL/path to the audio file (e.g., '/background-music.mp3')
  * @returns An object containing:
  *  - audioRef: Reference to the HTMLAudioElement
  *  - toggleAudio: Function to toggle play/pause
  *  - isPlaying: Current playback state (boolean)
+ *  - autoPlay: Function to manually trigger playback with fade-in effect
  *
  * Example:
  * ```tsx
  * 'use client';
  *
  * import { useBackgroundMusic } from './useAudioHooks';
+ * import { useState, useEffect } from 'react';
  *
  * export default function AudioComponent() {
- *   const { toggleAudio, isPlaying } = useBackgroundMusic('/background-music.mp3');
+ *   const { toggleAudio, isPlaying, autoPlay } = useBackgroundMusic('/background-music.mp3');
+ *   const [musicEnabled, setMusicEnabled] = useState(true);
+ *
+ *   useEffect(() => {
+ *     if (musicEnabled) {
+ *       autoPlay();
+ *     }
+ *   }, [musicEnabled, autoPlay]);
  *
  *   return (
  *     <div>
  *       <button onClick={toggleAudio}>
  *         {isPlaying ? 'Pause Music' : 'Play Music'}
+ *       </button>
+ *       <button onClick={() => setMusicEnabled(!musicEnabled)}>
+ *         {musicEnabled ? 'Disable Music' : 'Enable Music'}
  *       </button>
  *     </div>
  *   );
@@ -79,6 +90,11 @@ export function useBackgroundMusic(audioSrc: string) {
     }
   }, []);
 
+  // Manual autoplay trigger
+  const autoPlay = useCallback(() => {
+    attemptPlay();
+  }, [attemptPlay]);
+
   // Toggle play/pause
   const toggleAudio = useCallback(() => {
     if (audioRef.current) {
@@ -101,8 +117,6 @@ export function useBackgroundMusic(audioSrc: string) {
       audioRef.current.preload = 'auto'; // Preload audio for faster playback
     }
 
-    attemptPlay();
-
     // Handle page visibility to pause/resume audio
     const handleVisibilityChange = () => {
       if (document.hidden && audioRef.current && isPlaying.current) {
@@ -123,9 +137,9 @@ export function useBackgroundMusic(audioSrc: string) {
       document.removeEventListener('mousemove', () => {});
       document.removeEventListener('click', () => {});
     };
-  }, [audioSrc, attemptPlay]);
+  }, [audioSrc]);
 
-  return { audioRef, toggleAudio, isPlaying: isPlaying.current };
+  return { audioRef, toggleAudio, isPlaying: isPlaying.current, autoPlay };
 }
 
 /**

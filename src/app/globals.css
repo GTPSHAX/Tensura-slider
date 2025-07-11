@@ -86,3 +86,29 @@ body {
 .menu-item:hover::after {
   width: 100%;
 }
+
+/* globals.css */
+.pixelated-checkbox {
+  image-rendering: pixelated;
+  position: relative;
+}
+
+/* Add a checkmark for the checked state */
+.pixelated-checkbox::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  display: none;
+}
+
+.peer-checked + .pixelated-checkbox::after {
+  display: block;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="white"><path d="M4 8l2 2 6-6" stroke="white" stroke-width="2"/></svg>') no-repeat center;
+  background-size: contain;
+}
+
