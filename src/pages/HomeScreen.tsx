@@ -106,9 +106,9 @@ export default function HomeScreen() {
         callbackClose={playHoverSoundClose}
       >
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="font-[family-name:var(--font-pixelify-sans)] text-lg">Music</span>
-            <label className="relative inline-flex items-center cursor-pointer">
+          <div>
+            <label className="relative flex items-center justify-between cursor-pointer">
+              <span className="font-[family-name:var(--font-pixelify-sans)] text-lg">Music</span>
               <input
                 type="checkbox"
                 className="sr-only peer w-8 h-8" // Hide default checkbox
@@ -128,9 +128,9 @@ export default function HomeScreen() {
               ></div>
             </label>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="font-[family-name:var(--font-pixelify-sans)] text-lg">Sound Effects</span>
-            <label className="relative inline-flex items-center cursor-pointer">
+          <div>
+            <label className="relative flex items-center justify-between cursor-pointer">
+              <span className="font-[family-name:var(--font-pixelify-sans)] text-lg">Sound Effects</span>
               <input
                 type="checkbox"
                 className="sr-only peer w-8 h-8"

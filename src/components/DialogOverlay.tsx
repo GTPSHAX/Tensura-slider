@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { useHoverSound } from "@/hooks/useAudio";
-
 export default function DialogOverlay({ 
   isOpen, 
   onClose, 
@@ -14,8 +12,7 @@ export default function DialogOverlay({
   title: string; 
   callbackClose: () => void;
   children: React.ReactNode; 
-}) { 
-  const playHoverSound = useHoverSound("/music/computer_processing_sound_effects_short_click_select_01_122134_1.mp3");
+}) {
  
   if (!isOpen) return null; 
 
@@ -37,7 +34,7 @@ export default function DialogOverlay({
       <div 
         className="absolute inset-0 bg-black opacity-20" 
         onClick={onClose}
-        onMouseEnter={playHoverSound}
+        onMouseEnter={callbackClose}
       />
       
       {/* Dialog box */}
@@ -45,7 +42,7 @@ export default function DialogOverlay({
         className="relative max-w-md w-full m-4 animate-[fadeIn_300ms_ease-out]" 
         style={{ 
           imageRendering: 'pixelated',
-          filter: 'drop-shadow(4px 4px 0px rgba(0,0,0,0.3))'
+          filter: 'drop-shadow(3px 3px 0px rgba(0,0,0,0.3))'
         }} 
       > 
         {/* Main dialog container */}
@@ -77,7 +74,7 @@ export default function DialogOverlay({
             <button 
               onClick={onClose} 
               onMouseEnter={callbackClose}
-              className="w-6 h-6 bg-red-500 border-2 border-black text-white font-bold text-xs flex items-center justify-center hover:bg-red-600 transition-colors"
+              className="w-6 h-6 bg-red-500 border-2 border-sky-800 text-white font-bold text-xs flex items-center justify-center hover:bg-red-600 transition-colors"
               style={{ 
                 imageRendering: 'pixelated',
                 textShadow: '1px 1px 0px rgba(0,0,0,0.5)',
